@@ -1,0 +1,88 @@
+La commande pwd vous permet de connaître votre répertoire courant
+	pwd
+
+La commande ls vous permet de voir la liste des fichiers et répertoires dans le dossier courant 
+	ls
+
+La commande cd vous permet de vous placer dans un répertoire
+	cd mon_projet
+
+La commande touch vous permet de créer un fichier
+	touch fichieracreer.txt
+
+La commande mkdir vous permet de créer un dossier
+	mkdir repertoireacreer
+
+La commande cat vous permet d'afficher le contenu d’un fichier
+	cat monfichier.txt
+
+Commande 'vim' pour ouvrir un fichier dans Vim
+	vim mon fichier.txt
+On peut également utiliser son éditeur de texte habituel
+
+Pour activer un dossier comme repository Git, il suffit de se placer dans ce dossier avec le Terminal puis d'utiliser la commande git init
+	git init
+
+Pour gérer un repository, Git génère un index de tous les fichiers dont il doit faire le suivi. Lorsque vous créez un fichier dans un repository, vous devez donc l'ajouter à l'index Git à l'aide de la commande git add nomDeVotreFichier.extension
+	git add nouveau-fichier.md
+
+Pour gagner du temps, vous pouvez ajouter tous les fichiers dans le répertoire courant en tapant
+	git add .
+
+Lorsque vous modifiez votre repository, vous devez demander à Git d'enregistrer vos modifications en faisant un git commit. L'option -m vous permet de lui envoyer un message décrivant les modifications effectuées, ce qui s'avèrera très utile pour vous par la suite
+	git commmit -m "Ajouté ma nouveau-fichier.md (woohoo!)"
+
+Grâce à la commande git log qui vous affiche la liste de tous les commits que vous avez réalisés ! 
+	git log
+Dans la liste de cet historique, chaque commit est répertorié avec :
+- son SHA : son identifiant unique, qui se présente sous forme d'une longue chaîne de caractères et de nombres. Par exemple : "87753191cef0bdb955a4cb4ff841f7c2cce4cb1c".
+- son auteur : qui a fait le commit (utile lorsque vous travaillez à plusieurs sur un projet !)
+- sa date
+- sa description : vous vous rappelez, c'est le message de description que vous indiquez avec l'option -m lorsque vous faites votre git commit
+
+Et bien, si vous ne faites que mettre à jour un fichier que vous aviez déjà ajouté à l'index, vous pouvez condenser ces deux étapes de la façon suivante
+	git commit -a -m "Ajouté itinéraire dans checklist-vacances.md"
+L'option -a demande à Git de mettre à jour les fichiers déjà existants dans son index
+
+Pour vous positionner sur un commit donné de votre historique, il vous suffit d'utiliser la commande git checkout de la façon suivante 
+	git checkout SHADuCommit
+
+Pour revenir à votre branche principale (au commit le plus récent), on utilise la même commande 
+	git checkout master
+
+On ne peut pas vraiment "supprimer" un commit, mais on a plusieurs options pour l'annuler. Cependant, ces options ont des limites et sont à utiliser avec prudence et parcimonie !
+Je vous présente une de ces options : vous pouvez "revert" un commit, c'est-à-dire créer un nouveau commit qui fait l'inverse du précédent, avec la commande suivante
+	git revert SHADuCommit
+
+Sinon, si vous voulez simplement modifier le message de votre dernier commit, vous pouvez utiliser la commande suivante 
+	git commit --amend -m "Votre nouveau message"
+Mais attention, vous ne pouvez modifier ce message que si vous n'avez pas encore pushé votre commit sur l'origine !
+
+Je n'ai pas encore fait mon nouveau commit, mais je veux annuler tous les changements que je n'ai pas encore commités. Possible ?
+Possible avec un reset !
+	git commit reset --hard
+
+À partir de GitHub, vous pouvez copier un repository sur votre machine. Pour cela, il vous suffit de rechercher le repository qui vous intéresse sur GitHub, de vous y placer, puis d'utiliser l'option "clone URL" en bas à droite de l'écran. 
+Cette option vous propose un lien SSH, HTTPS ou Subversion. Ici, nous allons choisir un lien HTTPS, le copier, puis coller ce lien en utilisant la commande git clone dans le dossier que vous aurez choisi sur votre machine
+	git clone lienFourniParGitHub
+
+Vous avez clôné votre repo GitHub sur votre machine. Comment faire pour synchroniser les modifications que vous faites dans votre repo sur votre machine avec votre repo sur GitHub ?
+À vos marques... Ouvrez votre terminal et placez-vous dans votre repo local.
+Prêts... Faites un/des commit(s) des modifications que vous avez ajoutées sur ce repo.
+Pushez! Envoyez ces modifications sur votre repo GitHub en utilisant la commande git push:
+    git push origin master
+Cette commande demande à Git :
+- "Envoie mes modifs dans la branche master de mon remote origin."
+- La branche master est la branche qui contient le code courant de votre repo GitHub. Ne vous préoccupez pas trop du terme "branche", on y reviendra par la suite.
+- Le remote sur lequel vous envoyez votre code est appelé origin par défaut. Ici, ce remote est GitHub. Si vous aviez plusieurs remotes (par exemple, votre téléphone portable ou un 2e ordinateur), vous pourriez envoyer votre code sur un remote "téléphone" ou "ordi2".
+Lorsque vous lancez la commande git push, il est possible que l'on vous demande vos identifiants GitHub. Renseignez-les dans le terminal !
+
+Pour récupérer en local les dernières modifications du repo GitHub, il vous faut utiliser la commande git pull 
+	git pull origin master
+
+
+
+
+
+
+
